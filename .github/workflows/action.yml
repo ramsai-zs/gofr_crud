@@ -40,6 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           go version
+          go get developer.zopsmart.com/go/gofr/pkg/gofr
           go get -u golang.org/x/lint/golint
 
       # Run build of the application
