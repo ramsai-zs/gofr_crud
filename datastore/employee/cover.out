@@ -1,0 +1,18 @@
+mode: set
+example/datastore/employee/mysql.go:11.18,13.2 1 1
+example/datastore/employee/mysql.go:15.68,19.16 3 1
+example/datastore/employee/mysql.go:23.2,25.18 2 1
+example/datastore/employee/mysql.go:36.2,36.17 1 1
+example/datastore/employee/mysql.go:19.16,21.3 1 1
+example/datastore/employee/mysql.go:25.18,30.17 3 1
+example/datastore/employee/mysql.go:34.3,34.23 1 1
+example/datastore/employee/mysql.go:30.17,32.4 1 1
+example/datastore/employee/mysql.go:39.78,45.16 4 1
+example/datastore/employee/mysql.go:49.2,49.15 1 1
+example/datastore/employee/mysql.go:45.16,47.3 1 1
+example/datastore/employee/mysql.go:52.94,56.16 2 1
+example/datastore/employee/mysql.go:60.2,60.22 1 1
+example/datastore/employee/mysql.go:56.16,58.3 1 1
+example/datastore/employee/mysql.go:63.94,67.16 2 1
+example/datastore/employee/mysql.go:71.2,71.22 1 1
+example/datastore/employee/mysql.go:67.16,69.3 1 1

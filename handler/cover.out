@@ -1,0 +1,26 @@
+mode: set
+example/handler/http.go:15.40,17.2 1 1
+example/handler/http.go:19.60,22.16 2 1
+example/handler/http.go:26.2,26.18 1 1
+example/handler/http.go:22.16,24.3 1 1
+example/handler/http.go:29.64,32.13 2 1
+example/handler/http.go:36.2,38.16 2 1
+example/handler/http.go:42.2,44.16 2 1
+example/handler/http.go:48.2,48.18 1 1
+example/handler/http.go:32.13,34.3 1 1
+example/handler/http.go:38.16,40.3 1 1
+example/handler/http.go:44.16,46.3 1 1
+example/handler/http.go:51.63,56.13 3 1
+example/handler/http.go:60.2,62.16 2 1
+example/handler/http.go:66.2,66.37 1 1
+example/handler/http.go:70.2,74.16 3 1
+example/handler/http.go:78.2,78.18 1 1
+example/handler/http.go:56.13,58.3 1 1
+example/handler/http.go:62.16,64.3 1 1
+example/handler/http.go:66.37,68.3 1 1
+example/handler/http.go:74.16,76.3 1 1
+example/handler/http.go:81.63,84.37 2 1
+example/handler/http.go:88.2,90.16 2 1
+example/handler/http.go:94.2,94.18 1 1
+example/handler/http.go:84.37,86.3 1 1
+example/handler/http.go:90.16,92.3 1 1
