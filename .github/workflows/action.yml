@@ -37,11 +37,11 @@ jobs:
           go-version: '1.17.0' # The Go version to download (if necessary) and use.
 
       # Install all the dependencies
-      - name: Install dependencies
-        run: |
-          go version
-          go get developer.zopsmart.com/go/gofr/pkg/gofr
-          go get -u golang.org/x/lint/golint
+      #- name: Install dependencies
+       # run: |
+        #  go version
+         # go get developer.zopsmart.com/go/gofr/pkg/gofr
+          #go get -u golang.org/x/lint/golint
 
       # Run build of the application
       - name: Run build
