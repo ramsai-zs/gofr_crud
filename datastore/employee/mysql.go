@@ -2,8 +2,10 @@ package employee
 
 import (
 	"database/sql"
+
 	"developer.zopsmart.com/go/gofr/pkg/errors"
 	"developer.zopsmart.com/go/gofr/pkg/gofr"
+
 	"example/model"
 )
 
@@ -22,7 +24,7 @@ func (s store) EmpGet(ctx *gofr.Context) ([]model.Employee, error) {
 	}
 
 	defer func(rows *sql.Rows) {
-		err := rows.Close()
+		err = rows.Close()
 		if err != nil {
 			return
 		}
@@ -31,7 +33,7 @@ func (s store) EmpGet(ctx *gofr.Context) ([]model.Employee, error) {
 	for rows.Next() {
 		var e model.Employee
 
-		err := rows.Scan(&e.ID, &e.Age, &e.Name)
+		err = rows.Scan(&e.ID, &e.Age, &e.Name)
 
 		if err != nil {
 			return nil, errors.Error("Scan Error")

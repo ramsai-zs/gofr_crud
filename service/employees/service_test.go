@@ -27,8 +27,8 @@ func TestService_GetEmp(t *testing.T) {
 		err    error
 		mock   []*gomock.Call
 	}{
-		{"success", []model.Employee{{2, 21, "Ram"}}, nil, []*gomock.Call{
-			m.EXPECT().EmpGet(gomock.Any()).Return([]model.Employee{{2, 21, "Ram"}}, nil),
+		{"success", []model.Employee{{ID: 2, Age: 21, Name: "Ram"}}, nil, []*gomock.Call{
+			m.EXPECT().EmpGet(gomock.Any()).Return([]model.Employee{{ID: 2, Age: 21, Name: "Ram"}}, nil),
 		}},
 		{desc: "failure", output: nil, err: errors.Error("Connect Failed"), mock: []*gomock.Call{
 			m.EXPECT().EmpGet(gomock.Any()).Return(nil, errors.Error("Connect Failed"))}},
@@ -66,8 +66,8 @@ func TestService_GetEmpByID(t *testing.T) {
 		err    error
 		mock   []*gomock.Call
 	}{
-		{"Success", 1, model.Employee{1, 21, "Ram"}, nil, []*gomock.Call{m.EXPECT().
-			EmpGetByID(gomock.Any(), gomock.Any()).Return(model.Employee{1, 21, "Ram"}, nil),
+		{desc: "Success", id: 1, output: model.Employee{ID: 1, Age: 21, Name: "Ram"}, mock: []*gomock.Call{m.EXPECT().
+			EmpGetByID(gomock.Any(), gomock.Any()).Return(model.Employee{ID: 1, Age: 21, Name: "Ram"}, nil),
 		}},
 		{"Failure", 2, model.Employee{}, errors.Error("Connect Failed"), []*gomock.Call{m.EXPECT().
 			EmpGetByID(gomock.Any(), gomock.Any()).Return(model.Employee{}, errors.Error("Connect Failed")),
@@ -105,10 +105,8 @@ func TestService_CreateEmp(t *testing.T) {
 		err    error
 		mock   []*gomock.Call
 	}{
-		{"Success", model.Employee{1, 20, "Ram"}, model.Employee{1, 20, "Ram"},
-			nil, []*gomock.Call{m.EXPECT().EmpCreate(gomock.Any(), gomock.Any()).
-				Return(model.Employee{1, 20, "Ram"}, nil),
-			}},
+		{desc: "Success", input: model.Employee{ID: 1, Age: 20, Name: "Ram"}, output: model.Employee{ID: 1, Age: 20, Name: "Ram"},
+			mock: []*gomock.Call{m.EXPECT().EmpCreate(gomock.Any(), gomock.Any()).Return(model.Employee{ID: 1, Age: 20, Name: "Ram"}, nil)}},
 		{"Failure", model.Employee{2, 20, "Sai"}, model.Employee{},
 			errors.Error("Connect Failed"), []*gomock.Call{m.EXPECT().EmpCreate(gomock.Any(), gomock.Any()).
 				Return(model.Employee{}, errors.Error("Connect Failed"))}},

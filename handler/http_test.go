@@ -48,6 +48,7 @@ func TestHandler_Get(t *testing.T) {
 		ctx := gofr.NewContext(res, req, app)
 
 		resp, err := h.Get(ctx)
+
 		t.Run(tc.desc, func(t *testing.T) {
 			assert.Equal(t, tc.output, resp, "Test Failed")
 			assert.Equal(t, tc.err, err, "Test Failed")
@@ -121,11 +122,10 @@ func TestHandler_Update(t *testing.T) {
 		{"", "2", []byte(``), nil, errors.InvalidParam{Param: []string{"body"}}, nil},
 		{desc: "Failure", id: "3", req: []byte(`{"id":3,"age":23,"name":"gopal"}`), output: nil,
 			err: errors.Error("Connect Failed"), mock: []*gomock.Call{m.EXPECT().UpdateEmp(gomock.Any(), gomock.Any()).
-			Return(model.Employee{},
-				errors.Error("Connect Failed"))}},
+				Return(model.Employee{}, errors.Error("Connect Failed"))}},
 		{desc: "Success", id: "4", req: []byte(`{"id":4,"age":24,"name":"harish"}`),
 			output: model.Employee{ID: 4, Age: 24, Name: "harish"}, mock: []*gomock.Call{
-			m.EXPECT().UpdateEmp(gomock.Any(), gomock.Any()).Return(model.Employee{ID: 4, Age: 24, Name: "harish"}, nil)}},
+				m.EXPECT().UpdateEmp(gomock.Any(), gomock.Any()).Return(model.Employee{ID: 4, Age: 24, Name: "harish"}, nil)}},
 	}
 
 	for i, tc := range testcases {

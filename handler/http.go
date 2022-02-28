@@ -65,7 +65,7 @@ func (h handler) Update(c *gofr.Context) (interface{}, error) {
 		return nil, errors.Error("Failed to Convert to id")
 	}
 
-	if err := c.Bind(&emp); err != nil {
+	if err = c.Bind(&emp); err != nil {
 		return nil, errors.InvalidParam{Param: []string{"body"}}
 	}
 

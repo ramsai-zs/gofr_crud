@@ -3,6 +3,7 @@ package employees
 import (
 	"developer.zopsmart.com/go/gofr/pkg/errors"
 	"developer.zopsmart.com/go/gofr/pkg/gofr"
+
 	"example/datastore"
 	"example/model"
 )
@@ -21,6 +22,7 @@ func (s service) GetEmp(ctx *gofr.Context) ([]model.Employee, error) {
 	if err != nil {
 		return nil, errors.Error("Connect Failed")
 	}
+
 	return resp, nil
 }
 

@@ -39,19 +39,17 @@ func TestStore_EmpGet(t *testing.T) {
 		err    error
 		Mock   []interface{}
 	}{
+		{desc: "Failure", err: errors.DB{Err: errors.Error("Internal DB error")}, Mock: []interface{}{
+			mock.ExpectQuery(query).WithArgs().WillReturnError(errors.DB{Err: errors.Error("Internal DB error")}),
+		}},
 		{"success", []model.Employee{{1, 21, "Ram"}}, nil, []interface{}{
 			mock.ExpectQuery(query).WithArgs().WillReturnRows(row),
-		}},
-		{"Failure", nil, errors.DB{errors.Error("Internal DB error")}, []interface{}{
-			mock.ExpectQuery(query).WithArgs().WillReturnError(errors.DB{errors.Error("Internal DB error")}),
 		}},
 		{"ScanError", nil, errors.Error("Scan Error"), []interface{}{
 			mock.ExpectQuery(query).WithArgs().WillReturnRows(scanError),
 		}},
 	}
-
 	for i, tc := range testcases {
-
 		t.Run(tc.desc, func(t *testing.T) {
 			tc := tc
 			resp, err := dataStore.EmpGet(ctx)
@@ -93,7 +91,7 @@ func TestStore_EmpGetByID(t *testing.T) {
 		err    error
 		mock   []interface{}
 	}{
-		{"success", 1, model.Employee{1, 21, "Ram"}, nil, []interface{}{
+		{desc: "success", id: 1, output: model.Employee{ID: 1, Age: 21, Name: "Ram"}, mock: []interface{}{
 			mock.ExpectQuery(query).WithArgs(1).WillReturnRows(row),
 		}},
 		{"scanError", 3, model.Employee{}, errors.Error("Scan Error"), []interface{}{
@@ -140,12 +138,10 @@ func TestStore_EmpCreate(t *testing.T) {
 		err    error
 		mock   []interface{}
 	}{
-		{"Success", model.Employee{1, 21, "Ram"}, model.Employee{1, 21, "Ram"},
-			nil, []interface{}{mock.ExpectExec(exec).WithArgs(1, 21, "Ram").
-				WillReturnResult(sqlmock.NewResult(1, 1)),
-			}},
-		{"Failure", model.Employee{2, 22, "Sai"}, model.Employee{}, errors.Error("Internal DB Error"),
-			[]interface{}{mock.ExpectExec(execError).WithArgs(2, 22, "Sai", err).
+		{desc: "Success", input: model.Employee{ID: 1, Age: 21, Name: "Ram"}, output: model.Employee{ID: 1, Age: 21, Name: "Ram"},
+			mock: []interface{}{mock.ExpectExec(exec).WithArgs(1, 21, "Ram").WillReturnResult(sqlmock.NewResult(1, 1))}},
+		{desc: "Failure", input: model.Employee{ID: 2, Age: 22, Name: "Sai"}, err: errors.Error("Internal DB Error"),
+			mock: []interface{}{mock.ExpectExec(execError).WithArgs(2, 22, "Sai", err).
 				WillReturnError(errors.Error("Internal DB Error")),
 			}},
 	}
@@ -189,12 +185,10 @@ func TestStore_EmpUpdate(t *testing.T) {
 		err    error
 		mock   []interface{}
 	}{
-		{"success", model.Employee{1, 21, "Ram"}, model.Employee{1, 21, "Ram"},
-			nil, []interface{}{mock.ExpectExec(update).WithArgs(21, "Ram", 1).
-				WillReturnResult(sqlmock.NewResult(1, 1)),
-			}},
-		{"Failure", model.Employee{2, 22, "Sai"}, model.Employee{}, errors.Error("Internal DB Error"),
-			[]interface{}{mock.ExpectExec(updateError).WithArgs(2, 22, "Sai", 2, err).WillReturnError(errors.Error("Internal DB Error"))},
+		{desc: "success", input: model.Employee{ID: 1, Age: 21, Name: "Ram"}, output: model.Employee{ID: 1, Age: 21, Name: "Ram"},
+			mock: []interface{}{mock.ExpectExec(update).WithArgs(21, "Ram", 1).WillReturnResult(sqlmock.NewResult(1, 1))}},
+		{desc: "Failure", input: model.Employee{ID: 2, Age: 22, Name: "Sai"}, err: errors.Error("Internal DB Error"),
+			mock: []interface{}{mock.ExpectExec(updateError).WithArgs(2, 22, "Sai", 2, err).WillReturnError(errors.Error("Internal DB Error"))},
 		},
 	}
 
