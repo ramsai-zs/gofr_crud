@@ -14,6 +14,7 @@ type handler struct {
 	service service.EmpService
 }
 
+// nolint:revive // handlers should not be used without proper initialization with required dependency
 func New(h service.EmpService) handler {
 	return handler{service: h}
 }
